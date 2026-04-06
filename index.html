@@ -20,12 +20,13 @@
     <div id="sparkleLayer" aria-hidden="true"></div>
 
     <main class="scene">
-        <div class="card" id="flipCard">
+        <div class="card" id="flipCard" tabindex="0" role="button"
+            aria-label="Interactive card exploring Generative AI. Press Space to flip.">
 
             <div class="card__face card__face--front">
                 <img src="Media/Anime_Question.png" alt="Girl thinking at a desk" class="card__image">
                 <h1 class="glow-text">Is Generative AI replacing developers?</h1>
-                <p class="subtitle">Tap to execute <span></span></p>
+                <p class="subtitle">Tap or Press Space to execute <span>|</span></p>
             </div>
 
             <div class="card__face card__face--back">
@@ -43,6 +44,8 @@
                                 to augment human ingenuity, not replace it.</li>
                         </ul>
                     </div>
+                    <a href="https://github.com/bilbanzania/developer-web-card" target="_blank"
+                        class="cta-button">Initialize Deep Dive <span>|</span></a>
                 </div>
             </div>
 

@@ -1,13 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Cache Elements
     const flipCard = document.querySelector('#flipCard');
     const techLayer = document.querySelector('#techLayer');
     const sparkleLayer = document.querySelector('#sparkleLayer');
+    const scene = document.querySelector('.scene');
+    const ctaButton = document.querySelector('.cta-button');
     const syntaxSymbols = ['{ }', '< >', '/>', '0', '1', '();', '[]', '&&', '||'];
 
+    // Flip Interaction & Accessibility
     flipCard.addEventListener('click', () => {
         flipCard.classList.toggle('is-flipped');
+    });
+
+    flipCard.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault(); 
+            flipCard.classList.toggle('is-flipped');
+        }
+    });
+
+    // CTA Button Protection
+    if (ctaButton) {
+        ctaButton.addEventListener('click', (e) => e.stopPropagation());
+        ctaButton.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+        });
+    }
+
+    // 3D Hover Tilt Micro-interaction
+    scene.addEventListener('mousemove', (e) => {
+        const rect = scene.getBoundingClientRect();
+        const x = e.clientX - rect.left; 
+        const y = e.clientY - rect.top;  
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -10; 
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        scene.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    scene.addEventListener('mouseleave', () => {
+        scene.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg)`;
     });
 
     // Floating Tech Particles Generator
@@ -20,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const size = Math.random() * 1.5 + 0.8;
             const duration = Math.random() * 5 + 8;
-            const leftPos = Math.random() * 100;
+            const leftPos = Math.random() * 95; 
             
             particle.style.fontSize = `${size}rem`;
             particle.style.left = `${leftPos}vw`;
@@ -64,6 +100,5 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => ripple.remove(), 600);
     });
 
-    // Start background animations
     createTechParticles();
 });
