@@ -1,0 +1,226 @@
+/* Color Palette & Root Variables */
+:root {
+    --color-dark-bg: #0f172a;
+    --color-mid-bg: #1e293b;
+    --color-cyan: #06b6d4;
+    --color-indigo: #6366f1;
+    --color-white: #f8fafc;
+    --color-text-muted: #94a3b8;
+}
+
+/* Base Layout & Structure */
+html, body {
+    overflow: hidden; 
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, var(--color-dark-bg), var(--color-mid-bg));
+    font-family: 'Inter', sans-serif;
+    color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 🔄 3D Flip Card Physics 🔄 */
+.scene {
+    width: 90vw;
+    max-width: 500px;
+    height: clamp(500px, 80vh, 650px);
+    perspective: 1200px;
+    z-index: 10;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card__face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    background: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.2);
+    overflow: hidden; 
+}
+
+.card__face--front {
+    text-align: center;
+}
+
+.card__face--back {
+    transform: rotateY(180deg);
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+/* Image Styling */
+.card__image {
+    width: 100%;
+    flex: 0 1 45%;
+    min-height: 120px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 12px;
+    border: 2px solid rgba(6, 182, 212, 0.4);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 0;
+}
+
+/* Typography & Glowing Elements */
+.glow-text {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin: auto 0;
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.6);
+}
+
+.subtitle {
+    margin-top: 0; 
+    padding-top: 0;
+    color: var(--color-cyan);
+    font-family: 'Fira Code', monospace;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    animation: blinkOpacity 2s infinite;
+}
+
+.back-content {
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card__face--back h2 {
+    font-size: clamp(1.3rem, 4vw, 1.5rem);
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    color: var(--color-cyan);
+    text-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+    text-align: center;
+}
+
+.content-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    line-height: 1.4;
+    color: var(--color-text-muted);
+}
+
+.content-box li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.content-box li::before {
+    content: ">>";
+    position: absolute;
+    left: 0;
+    color: var(--color-indigo);
+    font-family: 'Fira Code', monospace;
+}
+
+.highlight {
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+/* Background Animations (Tech Particles) */
+.tech-particle {
+    position: absolute;
+    font-family: 'Fira Code', monospace;
+    color: rgba(6, 182, 212, 0.3);
+    font-size: 1.2rem;
+    user-select: none;
+    pointer-events: none;
+    animation: floatUpward 10s linear forwards;
+    z-index: 1;
+}
+
+.sparkle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: var(--color-cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkleFade 0.6s forwards;
+    z-index: 999;
+    box-shadow: 0 0 8px var(--color-cyan);
+}
+
+.ripple {
+    position: fixed;
+    border-radius: 50%;
+    border: 2px solid var(--color-indigo);
+    transform: scale(0);
+    animation: rippleEffect 0.6s ease-out forwards;
+    pointer-events: none;
+    z-index: 998;
+    width: 40px;
+    height: 40px;
+}
+
+/* Keyframes */
+@keyframes blinkOpacity {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes floatUpward {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes sparkleFade {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes rippleEffect {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}

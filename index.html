@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An interactive web card exploring Generative AI in Web Development.">
+    <title>AI & The Future of Dev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="stylez.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div id="techLayer" aria-hidden="true"></div>
+    <div id="sparkleLayer" aria-hidden="true"></div>
+
+    <main class="scene">
+        <div class="card" id="flipCard">
+
+            <div class="card__face card__face--front">
+                <img src="Media/Anime_Question.png" alt="Girl thinking at a desk" class="card__image">
+                <h1 class="glow-text">Is Generative AI replacing developers?</h1>
+                <p class="subtitle">Tap to execute <span></span></p>
+            </div>
+
+            <div class="card__face card__face--back">
+                <img src="Media/Anime_Answer.png" alt="Girl having a bright realization" class="card__image">
+                <div class="back-content">
+                    <h2>No. But a developer using AI might.</h2>
+                    <div class="content-box">
+                        <ul>
+                            <li><span class="highlight">Automates the Grunt Work:</span> Generative AI is transforming
+                                workflows by writing boilerplate and automating repetitive tasks.</li>
+                            <li><span class="highlight">Elevates Architecture:</span> Focus your energy on complex
+                                systems like RBAC and multi-tenant logic while AI handles the routine UI components.
+                            </li>
+                            <li><span class="highlight">The New Era:</span> The future is human-AI collaboration—a tool
+                                to augment human ingenuity, not replace it.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+
+</html>
